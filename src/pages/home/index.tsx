@@ -28,17 +28,13 @@ interface DataProp {
 export function Home() {
   const [input, setInput] = useState("");
   const [coins, setCoins] = useState<CoinProps[]>([]);
+  const [offset, setOffset] = useState(0);
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    getData();
-  }, []);
-
   async function getData() {
-    //fetch("https://api.coincap.oi/v3/assets?limit=10&offset=0")
     fetch(
-      "https://rest.coincap.io/v3/assets?limit=10&offset=0&apiKey=cd44abd9414edd577d8bc9c39d391464e40c533118cedeed86b44cecb6b34834",
+      `https://rest.coincap.io/v3/assets?limit=10&offset=${offset}&apiKey=cd44abd9414edd577d8bc9c39d391464e40c533118cedeed86b44cecb6b34834`,
     )
       .then((response) => response.json())
       .then((data: DataProp) => {
@@ -67,9 +63,16 @@ export function Home() {
         });
 
         //console.log(formatedResult);
-        setCoins(formatedResult);
+
+        const listCoins = [...coins, ...formatedResult];
+
+        setCoins(listCoins);
       });
   }
+
+  useEffect(() => {
+    getData();
+  }, [offset]);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -80,7 +83,12 @@ export function Home() {
   }
 
   function handleGetMore() {
-    alert("Carregar mais moedas...");
+    if (offset === 0) {
+      setOffset(10);
+      return;
+    }
+
+    setOffset(offset + 10);
   }
 
   return (
