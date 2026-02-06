@@ -1,73 +1,150 @@
-# React + TypeScript + Vite
+# 💰 CriptoApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Uma aplicação web moderna desenvolvida em React e TypeScript para consultar informações sobre criptomoedas em tempo real. O projeto consome a API do CoinCap para exibir dados atualizados sobre as principais moedas digitais do mercado.
 
-Currently, two official plugins are available:
+## 📸 Preview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Página Inicial
+![Página Inicial](./docs/screenshots/home.png)
 
-## React Compiler
+### Página de Detalhes
+![Página de Detalhes](./docs/screenshots/detail.png)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Busca de Moedas
+![Busca de Moedas](./docs/screenshots/search.png)
 
-## Expanding the ESLint configuration
+## 🚀 Funcionalidades
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Listagem de Criptomoedas**: Visualize as principais criptomoedas do mercado em uma tabela organizada
+- **Busca de Moedas**: Pesquise por qualquer criptomoeda digitando seu nome ou símbolo
+- **Detalhes da Moeda**: Acesse informações detalhadas sobre cada criptomoeda
+- **Paginação**: Carregue mais moedas conforme necessário
+- **Dados em Tempo Real**: Informações atualizadas sobre preço, volume, capitalização de mercado e variação de 24h
+- **Interface Responsiva**: Design adaptável para diferentes tamanhos de tela
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Tecnologias Utilizadas
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **React 19.2.0** - Biblioteca JavaScript para construção de interfaces
+- **TypeScript** - Superset do JavaScript com tipagem estática
+- **Vite** - Build tool moderna e rápida
+- **React Router DOM 7.12.0** - Roteamento para aplicações React
+- **React Icons 5.5.0** - Biblioteca de ícones
+- **CSS Modules** - Estilização com escopo local
+- **CoinCap API** - API para dados de criptomoedas
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📋 Pré-requisitos
+
+Antes de começar, você precisa ter instalado em sua máquina:
+
+- **Node.js** (versão 18 ou superior)
+- **npm** ou **yarn** (gerenciador de pacotes)
+
+## 🔧 Instalação
+
+1. Clone o repositório:
+```bash
+git clone <url-do-repositorio>
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Entre na pasta do projeto:
+```bash
+cd criptoapp
 ```
+
+3. Instale as dependências:
+```bash
+npm install
+```
+
+## ▶️ Como Executar
+
+### Modo de Desenvolvimento
+
+Para iniciar o servidor de desenvolvimento:
+
+```bash
+npm run dev
+```
+
+A aplicação estará disponível em `http://localhost:5173` (ou outra porta indicada no terminal).
+
+### Build para Produção
+
+Para criar uma build otimizada para produção:
+
+```bash
+npm run build
+```
+
+Os arquivos otimizados serão gerados na pasta `dist`.
+
+### Preview da Build
+
+Para visualizar a build de produção localmente:
+
+```bash
+npm run preview
+```
+
+## 📁 Estrutura do Projeto
+
+```
+criptoapp/
+├── public/              # Arquivos estáticos
+├── src/
+│   ├── assets/         # Imagens e recursos
+│   ├── components/     # Componentes reutilizáveis
+│   │   ├── header/     # Cabeçalho da aplicação
+│   │   └── layout/     # Layout principal
+│   ├── pages/          # Páginas da aplicação
+│   │   ├── home/       # Página inicial com listagem
+│   │   ├── detail/     # Página de detalhes da moeda
+│   │   └── notfound/   # Página 404
+│   ├── App.tsx         # Componente principal
+│   ├── main.tsx        # Ponto de entrada
+│   └── router.tsx      # Configuração de rotas
+├── package.json
+└── vite.config.ts
+```
+
+## 🎯 Rotas da Aplicação
+
+- `/` - Página inicial com listagem de criptomoedas
+- `/detail/:cripto` - Página de detalhes de uma criptomoeda específica
+- `*` - Página 404 para rotas não encontradas
+
+## 📊 Dados Exibidos
+
+Para cada criptomoeda, a aplicação exibe:
+
+- **Nome e Símbolo**: Identificação da moeda
+- **Preço**: Valor atual em USD
+- **Capitalização de Mercado**: Valor total de mercado
+- **Volume 24h**: Volume negociado nas últimas 24 horas
+- **Variação 24h**: Percentual de mudança no preço (com destaque visual para ganhos/perdas)
+
+## 🔍 Como Usar
+
+1. **Visualizar Moedas**: Na página inicial, você verá uma tabela com as principais criptomoedas
+2. **Buscar Moeda**: Use o campo de busca no topo da página para pesquisar por nome ou símbolo (ex: "bitcoin")
+3. **Ver Detalhes**: Clique no nome de qualquer moeda na tabela para ver informações detalhadas
+4. **Carregar Mais**: Use o botão "Carregar mais" para exibir mais moedas na listagem
+
+## 🧪 Scripts Disponíveis
+
+- `npm run dev` - Inicia o servidor de desenvolvimento
+- `npm run build` - Cria a build de produção
+- `npm run preview` - Visualiza a build de produção
+- `npm run lint` - Executa o linter para verificar o código
+
+## 📝 Licença
+
+Este projeto é de código aberto e está disponível sob a licença MIT.
+
+## 👨‍💻 Desenvolvido por
+
+Projeto desenvolvido como parte do curso Full Stack Pro da Sujeito Programador.
+
+---
+
+**Nota**: Este projeto utiliza a API do CoinCap. Certifique-se de que você tem uma conexão com a internet para que a aplicação funcione corretamente.
